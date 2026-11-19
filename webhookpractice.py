@@ -21,11 +21,13 @@ def get_headers(API_KEY: str, path: str, method="GET"):
         signature = private_key.sign(message)
     else:
         raise ValueError("Not ED25519")
+
     signature = base64.b64encode(signature).decode("utf-8")
+
     return {
-        "KALSHI_ACCESS_KEY": private_key,
-        "KALSHI_ACCESS_SIGNATURE": signature,
-        "KALSHI_ACCESS_TIMESTAMP": timestamp
+        "KALSHI-ACCESS-KEY": API_KEY,
+        "KALSHI-ACCESS-SIGNATURE": signature,
+        "KALSHI-ACCESS-TIMESTAMP": timestamp
     }
 auth_headers = get_headers("db709c9d-c776-4e87-8638-ee53c0ce1c75", "/trade-api/ws/v2", "GET")
 #print(auth_headers)
